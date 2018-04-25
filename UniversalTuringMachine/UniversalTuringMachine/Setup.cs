@@ -13,6 +13,7 @@ namespace UniversalTuringMachine
     public partial class Setup : Form
     {
 
+        public UniversalTuringMachine Machine { get; set; }
         public List<State> States { get; set; }
         public List<Calc> Calcs { get; set; }
         int cnt = 0;
@@ -90,6 +91,7 @@ namespace UniversalTuringMachine
                 lstSymbols.Items.Add(txtSymbols.Text);
                 ddSymbols.Items.Add(txtSymbols.Text);
                 ddWrite.Items.Add(txtSymbols.Text);
+                comboBox1.Items.Add(txtSymbols.Text);
                 txtSymbols.Text = "";
                 txtSymbols.Select();
             }
@@ -106,6 +108,76 @@ namespace UniversalTuringMachine
                         ddWrite.Text.ToCharArray()[0]));
             dataGridView1.DataSource = null;
             dataGridView1.DataSource = Calcs.ToList();
+        }
+
+        private void tape_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            for (int ix = 0; ix < tape.Items.Count; ++ix)
+                if (ix != e.Index) tape.SetItemChecked(ix, false);
+        }
+
+        private void btnAddToTape_Click(object sender, EventArgs e)
+        {
+            tape.Items.Add(comboBox1.Text);
+        }
+
+        private void GenerateMachine()
+        {
+            Machine = new UniversalTuringMachine(States, listToChar(), listToChar(), Calcs, getInitial(), getAccepted(), createTape());
+        }
+
+        private List<State> getAccepted()
+        {
+            List<State> states = new List<State>();
+            foreach (object item in lstStates.CheckedItems)
+            {
+                states.Add(States[lstStates.Items.IndexOf(item)]);
+            }
+
+            return states;
+        }
+
+        private State getInitial()
+        {
+            return States[Int32.Parse(ddInitial.SelectedValue.ToString())];
+        }
+
+        private Tape createTape()
+        {
+            Tape tp = new Tape();
+            List<char> left = new List<char>();
+            List<char> right = new List<char>();
+            int pos = tape.Items.IndexOf(tape.CheckedItems[0]);
+            int i = 0;
+
+            while(i<pos)
+            {
+                left.Add(tape.Items[i].ToString().ToCharArray()[0]);
+            }
+
+            while(i<tape.Items.Count)
+            {
+                right.Add(tape.Items[i].ToString().ToCharArray()[0]);
+            }
+
+            tp.Left = left;
+            tp.Right = right;
+            return tp;
+        }
+
+        private List<Char> listToChar(ListView lw)
+        {
+            List<char> chars = new List<char>();
+            foreach (ListViewItem item in lw.Items)
+            {
+                chars.Add(item.Text.ToCharArray()[0]);
+            }
+            return chars;
+        }
+
+        private List<Char> listToChar()
+        {
+            return listToChar(lstSymbols);
         }
     }
 }

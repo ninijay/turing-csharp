@@ -55,6 +55,10 @@ namespace UniversalTuringMachine
             this.lstSymbols = new System.Windows.Forms.ListView();
             this.label9 = new System.Windows.Forms.Label();
             this.ddInitial = new System.Windows.Forms.ComboBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.tape = new System.Windows.Forms.CheckedListBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.btnAddToTape = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -260,11 +264,52 @@ namespace UniversalTuringMachine
             this.ddInitial.Size = new System.Drawing.Size(39, 21);
             this.ddInitial.TabIndex = 24;
             // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(436, 9);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(176, 13);
+            this.label10.TabIndex = 25;
+            this.label10.Text = "Tape (Check current Head position)";
+            // 
+            // tape
+            // 
+            this.tape.CheckOnClick = true;
+            this.tape.FormattingEnabled = true;
+            this.tape.Location = new System.Drawing.Point(439, 56);
+            this.tape.Name = "tape";
+            this.tape.Size = new System.Drawing.Size(365, 124);
+            this.tape.TabIndex = 26;
+            this.tape.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.tape_ItemCheck);
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(439, 28);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(33, 21);
+            this.comboBox1.TabIndex = 27;
+            // 
+            // btnAddToTape
+            // 
+            this.btnAddToTape.Location = new System.Drawing.Point(478, 28);
+            this.btnAddToTape.Name = "btnAddToTape";
+            this.btnAddToTape.Size = new System.Drawing.Size(29, 23);
+            this.btnAddToTape.TabIndex = 28;
+            this.btnAddToTape.Text = "+";
+            this.btnAddToTape.UseVisualStyleBackColor = true;
+            this.btnAddToTape.Click += new System.EventHandler(this.btnAddToTape_Click);
+            // 
             // Setup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(823, 488);
+            this.Controls.Add(this.btnAddToTape);
+            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.tape);
+            this.Controls.Add(this.label10);
             this.Controls.Add(this.ddInitial);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.lstSymbols);
@@ -321,6 +366,10 @@ namespace UniversalTuringMachine
         private System.Windows.Forms.ListView lstSymbols;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.ComboBox ddInitial;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.CheckedListBox tape;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Button btnAddToTape;
     }
 }
 

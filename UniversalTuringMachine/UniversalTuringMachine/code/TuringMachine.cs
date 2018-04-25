@@ -53,7 +53,7 @@ namespace UniversalTuringMachine
                 catch (Exception ex)
                 {
 
-                    throw;
+                    run = false;
                 }
             }
         }

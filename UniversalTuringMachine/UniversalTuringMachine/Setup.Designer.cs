@@ -241,6 +241,7 @@ namespace UniversalTuringMachine
             this.lstSymbols.Size = new System.Drawing.Size(121, 77);
             this.lstSymbols.TabIndex = 22;
             this.lstSymbols.UseCompatibleStateImageBehavior = false;
+            this.lstSymbols.View = System.Windows.Forms.View.List;
             // 
             // label9
             // 

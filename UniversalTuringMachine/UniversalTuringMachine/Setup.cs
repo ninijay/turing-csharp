@@ -18,8 +18,19 @@ namespace UniversalTuringMachine
         int cnt = 0;
         public Setup()
         {
+            var dirs = new[]
+            {
+                new { Val = 1, Text = "Right"},
+                new { Val = -1, Text = "Left"},
+                new { Val = 0, Text = "Nowhere"}
+
+             };
             States = new List<State>();
+            Calcs = new List<Calc>();
             InitializeComponent();
+            cbDir.DataSource = dirs;
+            cbDir.DisplayMember = "Text";
+            cbDir.ValueMember = "Val";
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -77,22 +88,24 @@ namespace UniversalTuringMachine
             else
             {
                 lstSymbols.Items.Add(txtSymbols.Text);
+                ddSymbols.Items.Add(txtSymbols.Text);
+                ddWrite.Items.Add(txtSymbols.Text);
+                txtSymbols.Text = "";
+                txtSymbols.Select();
             }
-
-        }
-
-        private void lstSymbols_SelectedIndexChanged(object sender, EventArgs e)
-        {
 
         }
 
         private void btnAddStep_Click(object sender, EventArgs e)
         {
+            // Fix bug eith strings and chars
             Calcs.Add(new Calc(States[Int32.Parse(ddCurr.SelectedValue.ToString())], 
                         States[Int32.Parse(ddNext.SelectedValue.ToString())], 
                         Int32.Parse(cbDir.SelectedValue.ToString()), 
-                        ddSymbols.SelectedText[0], 
-                        ddWrite.SelectedText[0]));
+                        ddSymbols.Text.ToCharArray()[0], 
+                        ddWrite.Text.ToCharArray()[0]));
+            dataGridView1.DataSource = null;
+            dataGridView1.DataSource = Calcs.ToList();
         }
     }
 }

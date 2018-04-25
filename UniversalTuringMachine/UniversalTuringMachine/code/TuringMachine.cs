@@ -25,7 +25,7 @@ namespace UniversalTuringMachine
             EndlessTape = tp;
         }
 
-        private void Perform()
+        public void Perform()
         {
 
             Configuration conf = new Configuration(Q0, EndlessTape.Left, EndlessTape.Right);
@@ -35,6 +35,8 @@ namespace UniversalTuringMachine
             while(run){
                 try
                 {
+                    Console.WriteLine("Current Configuration:" + conf.ToString());
+                    Console.WriteLine("Tape: " + EndlessTape.ToString());
                     char pass;
                     if (conf.V.ElementAtOrDefault(0) != char.MinValue)
                     {
@@ -56,6 +58,9 @@ namespace UniversalTuringMachine
                     run = false;
                 }
             }
+
+            Console.WriteLine("Machine halted");
+            Console.WriteLine("Tape: " + EndlessTape.ToString());
         }
 
         private void MoveHead(int step)

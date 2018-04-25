@@ -150,7 +150,7 @@ namespace UniversalTuringMachine
             int pos = tape.Items.IndexOf(tape.CheckedItems[0]);
             int i = 0;
 
-            while(i<pos)
+            while(i<pos && i<tape.Items.Count)
             {
                 left.Add(tape.Items[i].ToString().ToCharArray()[0]);
             }
@@ -178,6 +178,13 @@ namespace UniversalTuringMachine
         private List<Char> listToChar()
         {
             return listToChar(lstSymbols);
+        }
+
+        private void btnRun_Click(object sender, EventArgs e)
+        {
+            GenerateMachine();
+            Execution x = new Execution(Machine);
+            x.Show();
         }
     }
 }

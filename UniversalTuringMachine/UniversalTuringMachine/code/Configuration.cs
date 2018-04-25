@@ -14,5 +14,10 @@ namespace UniversalTuringMachine
             U = u;
             V = v;
         }
+
+        public override string ToString()
+        {
+            return "State: " + Q.ToString() + " left: " + U.ToString() + " right: " + V.ToString();
+        }
     }
 }

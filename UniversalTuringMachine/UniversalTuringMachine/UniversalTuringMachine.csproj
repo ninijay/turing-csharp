@@ -52,6 +52,12 @@
     <Compile Include="code\State.cs" />
     <Compile Include="code\Tape.cs" />
     <Compile Include="code\TuringMachine.cs" />
+    <Compile Include="Execution.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Execution.Designer.cs">
+      <DependentUpon>Execution.cs</DependentUpon>
+    </Compile>
     <Compile Include="Setup.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -60,6 +66,10 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TextBoxTraceListener.cs" />
+    <EmbeddedResource Include="Execution.resx">
+      <DependentUpon>Execution.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

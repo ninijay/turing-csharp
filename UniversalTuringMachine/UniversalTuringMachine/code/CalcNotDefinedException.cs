@@ -8,5 +8,8 @@ namespace UniversalTuringMachine
 {
     class CalcNotDefinedException : Exception
     {
+        public CalcNotDefinedException(string message) : base(message)
+        {
+        }
     }
 }

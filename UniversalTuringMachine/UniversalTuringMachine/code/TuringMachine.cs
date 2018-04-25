@@ -45,10 +45,9 @@ namespace UniversalTuringMachine
                         pass = _blank;
                     }
                     step = MapCalc(conf.Q, pass);
-                    EndlessTape.Left[currpos] = step.Write;
+                    EndlessTape.Right[currpos] = step.Write;
                     currpos += step.Direction;
-                    LeftWord(step.Direction);
-                    RightWord(step.Direction);
+                    MoveHead(step.Direction);
                     conf = new Configuration(step.Next, EndlessTape.Left, EndlessTape.Right);
                 }
                 catch (Exception ex)
@@ -59,7 +58,7 @@ namespace UniversalTuringMachine
             }
         }
 
-        private void moveHead(int step)
+        private void MoveHead(int step)
         {
             int x = 0;
             foreach (char symbol in EndlessTape.Left)

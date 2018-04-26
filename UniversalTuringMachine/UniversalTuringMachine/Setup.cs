@@ -32,6 +32,7 @@ namespace UniversalTuringMachine
             cbDir.DataSource = dirs;
             cbDir.DisplayMember = "Text";
             cbDir.ValueMember = "Val";
+            updateStates();
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -45,6 +46,7 @@ namespace UniversalTuringMachine
 
         private void updateStates()
         {
+            //List<State> initialValues = States.ToList();
             ddInitial.DataSource = null;
             ddInitial.DataSource = States;
             ddInitial.DisplayMember = "Name";
@@ -158,6 +160,7 @@ namespace UniversalTuringMachine
             while(i<tape.Items.Count)
             {
                 right.Add(tape.Items[i].ToString().ToCharArray()[0]);
+                ++i;
             }
 
             tp.Left = left;

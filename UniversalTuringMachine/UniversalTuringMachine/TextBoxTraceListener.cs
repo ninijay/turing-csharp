@@ -19,11 +19,21 @@ namespace UniversalTuringMachine
 
         public override void Write(string msg)
         {
-            //allows tBox to be updated from different thread
-            tBox.Parent.Invoke(new MethodInvoker(delegate ()
+            if (tBox.InvokeRequired)
+            {
+                tBox.Invoke(new MethodInvoker(delegate {
+                    tBox.Text += msg;
+                }));
+            }
+            else
             {
                 tBox.Text += msg;
-            }));
+            }
+            //allows tBox to be updated from different thread
+            //tBox.Parent.Invoke(new MethodInvoker(delegate ()
+            //{
+            //    tBox.Text += msg;
+            //}));
         }
 
         public override void WriteLine(string msg)

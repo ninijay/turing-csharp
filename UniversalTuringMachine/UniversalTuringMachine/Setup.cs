@@ -155,6 +155,7 @@ namespace UniversalTuringMachine
             while(i<pos && i<tape.Items.Count)
             {
                 left.Add(tape.Items[i].ToString().ToCharArray()[0]);
+                ++i;
             }
 
             while(i<tape.Items.Count)

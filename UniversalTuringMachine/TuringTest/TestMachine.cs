@@ -43,7 +43,14 @@ namespace TuringTest
             }
 
             machine = new UniversalTuringMachine.UniversalTuringMachine(states, new List<char>(), alpha, sigi, start, accept, tp);
+            machine.StateComputed += Machine_StateComputed;
             machine.Perform();
+
+        }
+
+        private void Machine_StateComputed(string text)
+        {
+            Console.WriteLine(text);
         }
     }
 }

@@ -25,14 +25,24 @@ namespace UniversalTuringMachine
                 new { Val = -1, Text = "Left"},
                 new { Val = 0, Text = "Nowhere"}
 
-             };
+            };
             States = new List<State>();
             Calcs = new List<Calc>();
             InitializeComponent();
+            dataGridView1.UserDeletedRow += DataGridView1_UserDeletedRow;
+            lstSymbols.Items.Add(string.Format("{0}",UniversalTuringMachine._blank));
+            ddSymbols.Items.Add(string.Format("{0}", UniversalTuringMachine._blank));
+            ddWrite.Items.Add(string.Format("{0}", UniversalTuringMachine._blank));
+
             cbDir.DataSource = dirs;
             cbDir.DisplayMember = "Text";
             cbDir.ValueMember = "Val";
             updateStates();
+        }
+
+        private void DataGridView1_UserDeletedRow(object sender, DataGridViewRowEventArgs e)
+        {
+            Console.WriteLine(Calcs);
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -40,13 +50,12 @@ namespace UniversalTuringMachine
             States.Add(new State("q" + cnt, cnt));
             lstStates.Items.Add(States[cnt].Name);
             updateStates();
-             cnt++;
+            cnt++;
         }
 
 
         private void updateStates()
         {
-            //List<State> initialValues = States.ToList();
             ddInitial.DataSource = null;
             ddInitial.DataSource = States;
             ddInitial.DisplayMember = "Name";
@@ -109,7 +118,7 @@ namespace UniversalTuringMachine
                         ddSymbols.Text.ToCharArray()[0], 
                         ddWrite.Text.ToCharArray()[0]));
             dataGridView1.DataSource = null;
-            dataGridView1.DataSource = Calcs.ToList();
+            dataGridView1.DataSource = new BindingList<Calc>(Calcs);
         }
 
         private void tape_ItemCheck(object sender, ItemCheckEventArgs e)

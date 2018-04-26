@@ -5,6 +5,10 @@ using System.Linq;
 namespace UniversalTuringMachine
 {
     public class UniversalTuringMachine{
+
+        public delegate void StateComputedEventHadler(string text);
+        public event StateComputedEventHadler StateComputed;
+
         public List<State> Q { get; set; }
         public List<char> Sigma { get; set; }
         public List<char> L { get; set; }
@@ -35,8 +39,11 @@ namespace UniversalTuringMachine
             while(run){
                 try
                 {
-                    Console.WriteLine("Current Configuration:" + conf.ToString());
-                    Console.WriteLine("Tape: " + EndlessTape.ToString());
+                    if (StateComputed != null)
+                    {
+                        StateComputed(EndlessTape.LeftFromHead() + conf.Q.ToString() + EndlessTape.RightFromHead());
+                    }
+
                     char pass;
                     if (conf.V.ElementAtOrDefault(0) != char.MinValue)
                     {
@@ -54,50 +61,43 @@ namespace UniversalTuringMachine
                 }
                 catch (Exception ex)
                 {
-
                     run = false;
                 }
             }
 
-            Console.WriteLine("Machine halted");
-            Console.WriteLine("Tape: " + EndlessTape.ToString());
+
+            //Console.WriteLine("Machine halted");
+            //Console.WriteLine("Tape: " + EndlessTape.ToString());
         }
 
         private void MoveHead(int step)
         {
-            int x = 0;
-            foreach (char symbol in EndlessTape.Left)
+            if (step > 0)
             {
-                if(step > 0)
+                char rightToLeft = EndlessTape.Right.FirstOrDefault();
+                if (rightToLeft == char.MinValue)
                 {
-                    if (EndlessTape.Right.ElementAtOrDefault(0) != char.MinValue)
-                    {
-                        EndlessTape.Left.Add(EndlessTape.Right[0]);
-                        EndlessTape.Right.RemoveAt(0);
-                    }
-                    else
-                    {
-                        // Pseudo Endless
-                        EndlessTape.Left.Add(_blank);
-                        EndlessTape.Right.Add(_blank);
-                    }
-                    
+                    EndlessTape.Left.Add(_blank);
                 }
-                else if(step < 0)
+                else
                 {
-                    if (EndlessTape.Left.ElementAtOrDefault(EndlessTape.Left.Count -1) != char.MinValue)
-                    {
-                        EndlessTape.Right.Insert(0,EndlessTape.Left[EndlessTape.Left.Count - 1]);
-                        EndlessTape.Right.RemoveAt(EndlessTape.Left.Count - 1);
-                    }
-                    else
-                    {
-                        // Pseudo Endless
-                        EndlessTape.Left.Add(_blank);
-                        EndlessTape.Right.Add(_blank);
-                    }
+                    EndlessTape.Left.Add(rightToLeft);
+                    EndlessTape.Right.RemoveAt(0);
                 }
-                x++;
+            }
+
+            if (step < 0)
+            {
+                char leftToRight = EndlessTape.Left.LastOrDefault();
+                if (leftToRight == char.MinValue)
+                {
+                    EndlessTape.Right.Insert(0, _blank);
+                }
+                else
+                {
+                    EndlessTape.Right.Insert(0, leftToRight);
+                    EndlessTape.Left.RemoveAt(EndlessTape.Left.Count - 1);
+                }
             }
         }
 

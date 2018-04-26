@@ -45,9 +45,9 @@ namespace UniversalTuringMachine
                     }
 
                     char pass;
-                    if (conf.V.ElementAtOrDefault(0) != char.MinValue)
+                    if (conf.V.FirstOrDefault() != char.MinValue)
                     {
-                        pass = conf.V[0];
+                        pass = conf.V.First();
                     }
                     else
                     {

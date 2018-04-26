@@ -50,7 +50,7 @@ namespace TuringTest
 
         private void Machine_StateComputed(string text)
         {
-            Console.WriteLine(text);
+            Console.WriteLine(text+"\n");
         }
     }
 }

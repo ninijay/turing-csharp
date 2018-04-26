@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27428.2037
+VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniversalTuringMachine", "UniversalTuringMachine\UniversalTuringMachine.csproj", "{7BB6D18B-36F9-4CAE-B336-DD41E9E6359B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TuringTest", "TuringTest\TuringTest.csproj", "{1CE6E4BA-BEFF-4884-9B59-270466FFB262}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{7BB6D18B-36F9-4CAE-B336-DD41E9E6359B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7BB6D18B-36F9-4CAE-B336-DD41E9E6359B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7BB6D18B-36F9-4CAE-B336-DD41E9E6359B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1CE6E4BA-BEFF-4884-9B59-270466FFB262}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CE6E4BA-BEFF-4884-9B59-270466FFB262}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1CE6E4BA-BEFF-4884-9B59-270466FFB262}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1CE6E4BA-BEFF-4884-9B59-270466FFB262}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

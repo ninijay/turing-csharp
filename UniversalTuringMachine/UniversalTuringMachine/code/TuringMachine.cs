@@ -27,6 +27,7 @@ namespace UniversalTuringMachine
             Q0 = q0;
             F = f;
             EndlessTape = tp;
+            tp.Right.Add(_blank);
         }
 
         public void Perform()

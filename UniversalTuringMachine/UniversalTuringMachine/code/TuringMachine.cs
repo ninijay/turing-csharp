@@ -54,7 +54,7 @@ namespace UniversalTuringMachine
                         pass = _blank;
                     }
                     step = MapCalc(conf.Q, pass);
-                    EndlessTape.Right[currpos] = step.Write;
+                    EndlessTape.WriteOnTabe(step.Write);
                     currpos += step.Direction;
                     MoveHead(step.Direction);
                     conf = new Configuration(step.Next, EndlessTape.Left, EndlessTape.Right);

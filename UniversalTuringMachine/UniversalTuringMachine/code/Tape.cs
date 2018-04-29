@@ -9,7 +9,14 @@ namespace UniversalTuringMachine
 
         public void WriteOnTabe(char symbol)
         {
-            Right[0] = symbol;
+            if (Right.Count == 0)
+            {
+                Right.Insert(0, symbol);
+            }
+            else
+            {
+                Right[0] = symbol;
+            }
         }
 
         public string LeftFromHead()

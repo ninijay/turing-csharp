@@ -27,7 +27,6 @@ namespace UniversalTuringMachine
             Q0 = q0;
             F = f;
             EndlessTape = tp;
-            tp.Right.Add(_blank);
         }
 
         public void Perform()
@@ -42,7 +41,12 @@ namespace UniversalTuringMachine
                 {
                     if (StateComputed != null)
                     {
-                        StateComputed(EndlessTape.LeftFromHead() + conf.Q.ToString() + EndlessTape.RightFromHead());
+                        string output = string.Empty;
+                        output += EndlessTape.LeftFromHead();
+                        if (output != string.Empty) output += ",";
+                        output += "'" + conf.Q.ToString() + "'";
+                        output += EndlessTape.RightFromHead();
+                        StateComputed(output);
                     }
 
                     char pass;
@@ -75,6 +79,11 @@ namespace UniversalTuringMachine
         {
             if (step > 0)
             {
+                if (EndlessTape.Right.Count == 0)
+                {
+                    Console.WriteLine(char.MinValue);
+                }
+
                 char rightToLeft = EndlessTape.Right.FirstOrDefault();
                 if (rightToLeft == char.MinValue)
                 {
@@ -89,6 +98,11 @@ namespace UniversalTuringMachine
 
             if (step < 0)
             {
+                if (EndlessTape.Left.Count == 0)
+                {
+                    Console.WriteLine(char.MinValue);
+                }
+
                 char leftToRight = EndlessTape.Left.LastOrDefault();
                 if (leftToRight == char.MinValue)
                 {

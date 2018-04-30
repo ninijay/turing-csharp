@@ -56,8 +56,8 @@ namespace UniversalTuringMachine
             this.label9 = new System.Windows.Forms.Label();
             this.ddInitial = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.tape = new System.Windows.Forms.CheckedListBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.clbTape = new System.Windows.Forms.CheckedListBox();
+            this.cBTapeValues = new System.Windows.Forms.ComboBox();
             this.btnAddToTape = new System.Windows.Forms.Button();
             this.btnRun = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -268,6 +268,7 @@ namespace UniversalTuringMachine
             this.lstSymbols.TabIndex = 22;
             this.lstSymbols.UseCompatibleStateImageBehavior = false;
             this.lstSymbols.View = System.Windows.Forms.View.List;
+            this.lstSymbols.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.lstSymbols_PreviewKeyDown);
             // 
             // label9
             // 
@@ -298,25 +299,26 @@ namespace UniversalTuringMachine
             this.label10.TabIndex = 25;
             this.label10.Text = "Tape (Check current Head position)";
             // 
-            // tape
+            // clbTape
             // 
-            this.tape.CheckOnClick = true;
-            this.tape.FormattingEnabled = true;
-            this.tape.Location = new System.Drawing.Point(1171, 134);
-            this.tape.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
-            this.tape.Name = "tape";
-            this.tape.Size = new System.Drawing.Size(967, 268);
-            this.tape.TabIndex = 26;
-            this.tape.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.tape_ItemCheck);
+            this.clbTape.CheckOnClick = true;
+            this.clbTape.FormattingEnabled = true;
+            this.clbTape.Location = new System.Drawing.Point(1171, 134);
+            this.clbTape.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.clbTape.Name = "clbTape";
+            this.clbTape.Size = new System.Drawing.Size(967, 268);
+            this.clbTape.TabIndex = 26;
+            this.clbTape.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.tape_ItemCheck);
+            this.clbTape.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.clbTape_PreviewKeyDown);
             // 
-            // comboBox1
+            // cBTapeValues
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(1171, 67);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(81, 39);
-            this.comboBox1.TabIndex = 27;
+            this.cBTapeValues.FormattingEnabled = true;
+            this.cBTapeValues.Location = new System.Drawing.Point(1171, 67);
+            this.cBTapeValues.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.cBTapeValues.Name = "cBTapeValues";
+            this.cBTapeValues.Size = new System.Drawing.Size(81, 39);
+            this.cBTapeValues.TabIndex = 27;
             // 
             // btnAddToTape
             // 
@@ -347,8 +349,8 @@ namespace UniversalTuringMachine
             this.ClientSize = new System.Drawing.Size(2195, 1164);
             this.Controls.Add(this.btnRun);
             this.Controls.Add(this.btnAddToTape);
-            this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.tape);
+            this.Controls.Add(this.cBTapeValues);
+            this.Controls.Add(this.clbTape);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.ddInitial);
             this.Controls.Add(this.label9);
@@ -408,8 +410,8 @@ namespace UniversalTuringMachine
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.ComboBox ddInitial;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.CheckedListBox tape;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.CheckedListBox clbTape;
+        private System.Windows.Forms.ComboBox cBTapeValues;
         private System.Windows.Forms.Button btnAddToTape;
         private System.Windows.Forms.Button btnRun;
     }

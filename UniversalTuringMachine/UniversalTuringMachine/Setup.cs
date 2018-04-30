@@ -89,24 +89,27 @@ namespace UniversalTuringMachine
 
         private void btnAddSymbol_Click(object sender, EventArgs e)
         {
-            if(String.IsNullOrEmpty(txtSymbols.Text))
+            if (String.IsNullOrEmpty(txtSymbols.Text))
             {
                 MessageBox.Show("Please enter a Symbol");
             }
-            else if(txtSymbols.Text.Count() > 1)
+            else if (txtSymbols.Text.Count() > 1)
             {
                 MessageBox.Show("Please enter only ONE Symbol");
+            }
+            else if (lstSymbols.Items.Cast<ListViewItem>().Any(x => x.Text == txtSymbols.Text))
+            {
+                MessageBox.Show("Symbol already in list");
             }
             else
             {
                 lstSymbols.Items.Add(txtSymbols.Text);
                 ddSymbols.Items.Add(txtSymbols.Text);
                 ddWrite.Items.Add(txtSymbols.Text);
-                comboBox1.Items.Add(txtSymbols.Text);
-                txtSymbols.Text = "";
-                txtSymbols.Select();
+                cBTapeValues.Items.Add(txtSymbols.Text);
             }
-
+            txtSymbols.Text = "";
+            txtSymbols.Select();
         }
 
         private void btnAddStep_Click(object sender, EventArgs e)
@@ -123,13 +126,17 @@ namespace UniversalTuringMachine
 
         private void tape_ItemCheck(object sender, ItemCheckEventArgs e)
         {
-            for (int ix = 0; ix < tape.Items.Count; ++ix)
-                if (ix != e.Index) tape.SetItemChecked(ix, false);
+            for (int ix = 0; ix < clbTape.Items.Count; ++ix)
+                if (ix != e.Index) clbTape.SetItemChecked(ix, false);
         }
 
         private void btnAddToTape_Click(object sender, EventArgs e)
         {
-            tape.Items.Add(comboBox1.Text);
+            clbTape.Items.Add(cBTapeValues.Text);
+            if (clbTape.Items.Count == 1)
+            {
+                clbTape.SetItemChecked(0, true);
+            }
         }
 
         private void GenerateMachine()
@@ -158,18 +165,18 @@ namespace UniversalTuringMachine
             Tape tp = new Tape();
             List<char> left = new List<char>();
             List<char> right = new List<char>();
-            int pos = tape.Items.IndexOf(tape.CheckedItems[0]);
+            int pos = clbTape.Items.IndexOf(clbTape.CheckedItems[0]);
             int i = 0;
 
-            while(i<pos && i<tape.Items.Count)
+            while(i<pos && i<clbTape.Items.Count)
             {
-                left.Add(tape.Items[i].ToString().ToCharArray()[0]);
+                left.Add(clbTape.Items[i].ToString().ToCharArray()[0]);
                 ++i;
             }
 
-            while(i<tape.Items.Count)
+            while(i<clbTape.Items.Count)
             {
-                right.Add(tape.Items[i].ToString().ToCharArray()[0]);
+                right.Add(clbTape.Items[i].ToString().ToCharArray()[0]);
                 ++i;
             }
 
@@ -198,6 +205,46 @@ namespace UniversalTuringMachine
             GenerateMachine();
             Execution x = new Execution(Machine);
             x.Show();
+        }
+
+        private void clbTape_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete)
+            {
+                if (clbTape.SelectedIndex >= 0)
+                {
+                    clbTape.Items.Remove(clbTape.SelectedItem);
+                }
+            }
+        }
+
+        private void lstSymbols_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete)
+            {
+                for (int i = lstSymbols.Items.Count - 1; i >= 0; i--)
+                {
+                    if (lstSymbols.Items[i].Selected && lstSymbols.Items[i].Text != UniversalTuringMachine._blank.ToString())
+                    {
+                        var valueToRemove = lstSymbols.Items[i];
+                        for (int j = clbTape.Items.Count - 1; j >= 0; j--)
+                        {
+                            string lbValue = (string)clbTape.Items[j];
+
+                            if (lbValue == valueToRemove.Text)
+                            {
+                                clbTape.Items.RemoveAt(j);
+                            }
+                        }
+                        
+                        cBTapeValues.Items.Remove(valueToRemove.Text);
+                        cBTapeValues.SelectedIndex = -1;
+                        ddSymbols.Items.Remove(valueToRemove.Text);
+                        ddWrite.Items.Remove(valueToRemove.Text);
+                        lstSymbols.Items.RemoveAt(i);
+                    }
+                }
+            }
         }
     }
 }
